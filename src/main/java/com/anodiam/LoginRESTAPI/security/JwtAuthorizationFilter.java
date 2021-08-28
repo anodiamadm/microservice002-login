@@ -1,6 +1,6 @@
 package com.anodiam.LoginRESTAPI.security;
 
-import com.anodiam.LoginRESTAPI.db.UserRepository;
+import com.anodiam.LoginRESTAPI.db.Repository.UserRepository;
 import com.anodiam.LoginRESTAPI.model.User;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
