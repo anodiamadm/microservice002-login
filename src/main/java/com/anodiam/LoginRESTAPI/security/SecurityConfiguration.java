@@ -1,6 +1,6 @@
 package com.anodiam.LoginRESTAPI.security;
 
-import com.anodiam.LoginRESTAPI.db.UserRepository;
+import com.anodiam.LoginRESTAPI.db.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -65,9 +65,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                                           TOKEN_PREFIX, HEADER_STRING)))
                 .authorizeRequests()
 //                Configure Access Rules
-                .antMatchers("/login").permitAll()
-                .antMatchers("/api/public/management/*").hasRole("MANAGER")
-                .antMatchers("/api/public/admin/*").hasRole("ADMIN");
+                .antMatchers("/login").permitAll();
     }
 
     @Bean
