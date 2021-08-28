@@ -1,6 +1,6 @@
 package com.anodiam.LoginRESTAPI.security;
 
-import com.anodiam.LoginRESTAPI.db.UserRepository;
+import com.anodiam.LoginRESTAPI.db.Repository.UserRepository;
 import com.anodiam.LoginRESTAPI.model.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
