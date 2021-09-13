@@ -1,8 +1,5 @@
 package com.anodiam.LoginRESTAPI.model;
 
-//import com.fasterxml.jackson.annotation.JsonBackReference;
-//import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.ArrayList;
