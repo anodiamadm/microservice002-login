@@ -45,7 +45,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     }
 
     private Authentication getUsernamePasswordAuthentication(HttpServletRequest request) {
-
         String token = request.getHeader(jwtProperties.getHEADER_STRING());
         if(token != null) {
 //            Parse the token and validate it
