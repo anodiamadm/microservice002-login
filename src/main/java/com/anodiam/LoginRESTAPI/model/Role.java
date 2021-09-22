@@ -1,11 +1,16 @@
 package com.anodiam.LoginRESTAPI.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "mst_role",
 		uniqueConstraints={@UniqueConstraint(name="uk_role_name", columnNames="role_name")},
 		indexes={@Index(name="idx_role_name", columnList="role_name")})
@@ -20,8 +25,8 @@ public class Role {
 	private String roleName;
 
 	@ManyToMany(mappedBy = "roleList")
-//	@JsonBackReference
-//	@JsonIgnore
+	@JsonBackReference
+	@JsonIgnore
 	private Collection<User> userList = new ArrayList<>();
 
 	public Role(String roleName) {
@@ -47,8 +52,8 @@ public class Role {
 		this.roleName = roleName;
 	}
 
-	//	@JsonBackReference
-//	@JsonIgnore
+	@JsonBackReference
+	@JsonIgnore
 	public Collection<User> getUserList() {
 		return userList;
 	}

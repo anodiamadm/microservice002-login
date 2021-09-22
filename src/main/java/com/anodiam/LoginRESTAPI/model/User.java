@@ -1,5 +1,8 @@
 package com.anodiam.LoginRESTAPI.model;
 
+import com.anodiam.LoginRESTAPI.model.common.MessageResponse;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -10,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "mst_user",
         uniqueConstraints={@UniqueConstraint(name="uk_username", columnNames="username")},
         indexes={@Index(name="idx_username", columnList="username")})
@@ -31,17 +35,20 @@ public class User {
     @Column(nullable = false, length = 255)
     private String username;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-//    @JsonManagedReference
+    @JsonManagedReference
     private List<Role> roleList = new ArrayList<>();
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(name = "user_permission", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "permission_id"))
-//    @JsonManagedReference
+    @JsonManagedReference
     private List<Permission> permissionList = new ArrayList<>();
+
+    @Transient
+    private MessageResponse messageResponse;
 
     public User(String username, String password) {
         this.username = username;
@@ -50,11 +57,19 @@ public class User {
         this.dateCreated = new Date();
     }
 
+    public MessageResponse getMessageResponse() {
+        return messageResponse;
+    }
+
+    public void setMessageResponse(MessageResponse messageResponse) {
+        this.messageResponse = messageResponse;
+    }
+
     public void setUserId(BigInteger userId) {
         this.userId = userId;
     }
 
-    protected User(){}
+    public User(){}
 
     public Date getDateCreated() {
         return dateCreated;

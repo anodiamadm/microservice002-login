@@ -1,6 +1,6 @@
 package com.anodiam.LoginRESTAPI.security;
 
-import com.anodiam.LoginRESTAPI.db.Repository.UserRepository;
+import com.anodiam.LoginRESTAPI.serviceRepository.User.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
