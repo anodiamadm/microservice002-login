@@ -38,6 +38,8 @@ public class User {
     @Transient
     private MessageResponse messageResponse;
 
+    public User(){}
+
     public User(String username, String password) {
         this.username = username;
         this.password = password;
@@ -56,8 +58,6 @@ public class User {
     public void setUserId(BigInteger userId) {
         this.userId = userId;
     }
-
-    public User(){}
 
     public Date getDateCreated() {
         return dateCreated;

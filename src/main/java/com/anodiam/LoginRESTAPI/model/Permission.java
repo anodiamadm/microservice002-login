@@ -1,6 +1,9 @@
 package com.anodiam.LoginRESTAPI.model;
 
 import com.anodiam.LoginRESTAPI.model.common.MessageResponse;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.math.BigInteger;
