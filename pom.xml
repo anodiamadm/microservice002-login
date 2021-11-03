@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.anodiam.services</groupId>
-	<artifactId>Login REST API</artifactId>
+	<artifactId>LoginRESTAPI</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>LoginRESTAPI</name>
 	<description>REST API to generate a JWT token after Authentication and Authorization after successful login with username and password</description>
@@ -74,6 +74,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
