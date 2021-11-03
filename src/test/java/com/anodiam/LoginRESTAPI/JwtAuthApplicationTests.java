@@ -36,9 +36,13 @@ class JwtAuthApplicationTests {
 		String userName="pinakidas";
 		String password="adcb@12AB";
 		User inputUser=new User(userName, password);
-//		Need to write these lines to verify login
-//		User newStudent = userService.save(inputUser);
-//		Need to write these lines to verify login
+//		************************* Need to write these lines to verify login *************************
+//		Call login function (username, password) that returns JSON with response message and JWT token
+//		1. Check if response message = "Student login successful"
+//		2. Check if JWT token format is correct (Header = Bearer;
+//		   Initial few PREFIX chars are correct; length is correct)
+//		If both conditions 1 & 2 above pass, consider test case successful.
+//		************************* Need to write these lines to verify login *************************
 		assertEquals(inputUser.getMessageResponse().getMessage(),
 				"Student login successful");
 	}
@@ -51,9 +55,12 @@ class JwtAuthApplicationTests {
 		String userName="abcdefgh";
 		String password="adcb@12AB";
 		User inputUser=new User(userName, password);
-//		Need to write these lines to verify login
-//		User newStudent = userService.save(inputUser);
-//		Need to write these lines to verify login
+//		************************* Need to write these lines to verify login *************************
+//		Call login function (Wrong-Username, password) that returns JSON with response message and JWT token
+//		1. Check if response message = "Login failure. Incorrect username or password."
+//		2. Check if the returned JWT token field is Null
+//		If both conditions 1 & 2 above pass, consider test case successful.
+//		************************* Need to write these lines to verify login *************************
 		assertEquals(inputUser.getMessageResponse().getMessage(),
 				"Login failure. Incorrect username or password.");
 	}
@@ -64,9 +71,12 @@ class JwtAuthApplicationTests {
 		String userName="pinakidas";
 		String password="abcdefgh@12AB";
 		User inputUser=new User(userName, password);
-//		Need to write these lines to verify login
-//		User newStudent = userService.save(inputUser);
-//		Need to write these lines to verify login
+//		************************* Need to write these lines to verify login *************************
+//		Call login function (username, Wrong-Password) that returns JSON with response message and JWT token
+//		1. Check if response message = "Login failure. Incorrect username or password."
+//		2. Check if the returned JWT token field is Null
+//		If both conditions 1 & 2 above pass, consider test case successful.
+//		************************* Need to write these lines to verify login *************************
 		assertEquals(inputUser.getMessageResponse().getMessage(),
 				"Login failure. Incorrect username or password.");
 	}
