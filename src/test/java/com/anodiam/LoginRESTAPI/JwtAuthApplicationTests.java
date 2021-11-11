@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.Assert.*;
 
-
 @SpringBootTest
 class JwtAuthApplicationTests {
 
@@ -20,14 +19,13 @@ class JwtAuthApplicationTests {
 	}
 
 //*******************************************************************************************
-//	JUNIT TEST CASES for microservice001-student-signup Test Based Development Starts Here
+//	JUNIT TEST CASES for microservice002-login Test Based Development Starts Here
 //*******************************************************************************************
 //	Following JUnits need to pass at Dev environment to be deployed to Test environment
 
 //	Use Case 5: Given I am an unsigned user, when I fill up the fields:
 //	(username, password) and click on the Login button:
-
-//	If I enter correct username and password, I should receive a valid Authorization Hex Token
+//	If I enter correct username and password, I should receive a valid JWT Authorization Token (in Header)
 //	Also, I should get the message "Student login successful".
 
 	@Test
@@ -44,11 +42,11 @@ class JwtAuthApplicationTests {
 //		If both conditions 1 & 2 above pass, consider test case successful.
 //		************************* Need to write these lines to verify login *************************
 		assertEquals(inputUser.getMessageResponse().getMessage(),
-				"Student login successful");
+				"Student login successful!");
 	}
 
-//	Use Case 5: If I enter incorrect username / password, I should NOT receive a valid Authorization Hex Token
-//	Also, I should get the message "Login failure. Incorrect username or password.".
+//	Use Case 5.1.1: If I enter incorrect username, (correct or wrong password) I should NOT receive
+//	a JWT Token, I should get the message "Login failure. Not a valid Anodiam username.".
 	@Test
 	public void testNegativeWrongUsername() throws Exception
 	{
@@ -62,9 +60,11 @@ class JwtAuthApplicationTests {
 //		If both conditions 1 & 2 above pass, consider test case successful.
 //		************************* Need to write these lines to verify login *************************
 		assertEquals(inputUser.getMessageResponse().getMessage(),
-				"Login failure. Incorrect username or password.");
+				"Login failure! Incorrect username or password.");
 	}
 
+//	Use Case 5.1.2: If I enter incorrect password (correct username), I should NOT receive a JWT Token
+//	Should get message "Login failure! Incorrect password.".
 	@Test
 	public void testNegativeWrongPassword() throws Exception
 	{
@@ -78,6 +78,6 @@ class JwtAuthApplicationTests {
 //		If both conditions 1 & 2 above pass, consider test case successful.
 //		************************* Need to write these lines to verify login *************************
 		assertEquals(inputUser.getMessageResponse().getMessage(),
-				"Login failure. Incorrect username or password.");
+				"Login failure! Incorrect username or password.");
 	}
 }
