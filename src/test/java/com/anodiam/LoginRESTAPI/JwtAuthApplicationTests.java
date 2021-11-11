@@ -45,7 +45,7 @@ class JwtAuthApplicationTests {
 				"Student login successful!");
 	}
 
-//	Use Case 5.1.1: If I enter incorrect username, (correct or wrong password) I should NOT receive
+//	Use Case 5.1: If I enter incorrect username, (correct or wrong password) I should NOT receive
 //	a JWT Token, I should get the message "Login failure. Not a valid Anodiam username.".
 	@Test
 	public void testNegativeWrongUsername() throws Exception
@@ -63,7 +63,7 @@ class JwtAuthApplicationTests {
 				"Login failure! Incorrect username or password.");
 	}
 
-//	Use Case 5.1.2: If I enter incorrect password (correct username), I should NOT receive a JWT Token
+//	Use Case 5.2: If I enter incorrect password (correct username), I should NOT receive a JWT Token
 //	Should get message "Login failure! Incorrect password.".
 	@Test
 	public void testNegativeWrongPassword() throws Exception
