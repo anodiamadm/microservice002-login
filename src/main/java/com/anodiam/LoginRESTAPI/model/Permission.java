@@ -1,9 +1,6 @@
 package com.anodiam.LoginRESTAPI.model;
 
 import com.anodiam.LoginRESTAPI.model.common.MessageResponse;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.math.BigInteger;
@@ -16,8 +13,10 @@ public class Permission {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="permission_id")
 	private BigInteger permissionId;
 
+	@Column(name="permission_name")
 	private String permissionName;
 
 	@ManyToMany(mappedBy = "permissionList")

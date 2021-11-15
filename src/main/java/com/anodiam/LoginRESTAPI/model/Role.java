@@ -13,8 +13,9 @@ public class Role {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private BigInteger roleId;
+	private BigInteger role_id;
 
+	@Column(name="role_name")
 	private String roleName;
 
 	@ManyToMany(mappedBy = "roleList")
@@ -22,10 +23,6 @@ public class Role {
 
 	@Transient
 	private MessageResponse messageResponse;
-
-	public Role(String roleName) {
-		this.roleName = roleName;
-	}
 
 	public Role() {
 	}
@@ -38,12 +35,12 @@ public class Role {
 		this.messageResponse = messageResponse;
 	}
 
-	public void setRoleId(BigInteger roleId) {
-		this.roleId = roleId;
+	public BigInteger getRole_id() {
+		return role_id;
 	}
 
-	public BigInteger getRoleId() {
-		return roleId;
+	public void setRole_id(BigInteger role_id) {
+		this.role_id = role_id;
 	}
 
 	public String getRoleName() {
