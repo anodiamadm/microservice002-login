@@ -25,9 +25,8 @@ class JwtAuthApplicationTests {
 
 //	Use Case 5: Given I am an unsigned user, when I fill up the fields:
 //	(username, password) and click on the Login button:
-//	If I enter correct username and password, I should receive a valid JWT Authorization Token (in Header)
-//	Also, I should get the message "Student login successful".
-
+//	If I enter correct username and password, I should receive response status = 200 Ok, and
+//	a valid JWT Authorization Token
 	@Test
 	public void testPositiveSuccessfulLogin() throws Exception
 	{
@@ -36,48 +35,42 @@ class JwtAuthApplicationTests {
 		User inputUser=new User(userName, password);
 //		************************* Need to write these lines to verify login *************************
 //		Call login function (username, password) that returns JSON with response message and JWT token
-//		1. Check if response message = "Student login successful"
-//		2. Check if JWT token format is correct (Header = Bearer;
-//		   Initial few PREFIX chars are correct; length is correct)
+//		1. Check if the response status is 200, Ok
+//		2. Check if JWT Bearer Authorization token is output in the Response JSON body:
+//			format of JWT token should be ('Bearer' followed by few chars)
 //		If both conditions 1 & 2 above pass, consider test case successful.
 //		************************* Need to write these lines to verify login *************************
-		assertEquals(inputUser.getMessageResponse().getMessage(),
-				"Student login successful!");
 	}
 
 //	Use Case 5.1: If I enter incorrect username, (correct or wrong password) I should NOT receive
-//	a JWT Token, I should get the message "Login failure. Not a valid Anodiam username.".
+//	a JWT Token, I should get the response status as 403 unauthorized.
 	@Test
 	public void testNegativeWrongUsername() throws Exception
 	{
 		String userName="abcdefgh";
 		String password="adcb@12AB";
 		User inputUser=new User(userName, password);
-//		************************* Need to write these lines to verify login *************************
-//		Call login function (Wrong-Username, password) that returns JSON with response message and JWT token
-//		1. Check if response message = "Login failure. Incorrect username or password."
-//		2. Check if the returned JWT token field is Null
+//		**************************************************
+//		Call login function (Wrong-Username, password)
+//		1. Check if no JWT token is output
+//		2. Check if response status as 403 unauthorized
 //		If both conditions 1 & 2 above pass, consider test case successful.
-//		************************* Need to write these lines to verify login *************************
-		assertEquals(inputUser.getMessageResponse().getMessage(),
-				"Login failure! Not a valid Anodiam username.");
+//		**************************************************
 	}
 
-//	Use Case 5.2: If I enter incorrect password (correct username), I should NOT receive a JWT Token
-//	Should get message "Login failure! Incorrect password.".
+//	Use Case 5.2: If I enter incorrect password (correct username),  I should NOT receive
+//	a JWT Token, I should get the response status as 403 unauthorized.
 	@Test
 	public void testNegativeWrongPassword() throws Exception
 	{
 		String userName="pinakidas";
 		String password="abcdefgh@12AB";
 		User inputUser=new User(userName, password);
-//		************************* Need to write these lines to verify login *************************
+//		**************************************************
 //		Call login function (username, Wrong-Password) that returns JSON with response message and JWT token
-//		1. Check if response message = "Login failure. Incorrect username or password."
-//		2. Check if the returned JWT token field is Null
+//		1. Check if no JWT token is output
+//		2. Check if response status as 403 unauthorized
 //		If both conditions 1 & 2 above pass, consider test case successful.
-//		************************* Need to write these lines to verify login *************************
-		assertEquals(inputUser.getMessageResponse().getMessage(),
-				"Login failure! Incorrect password..");
-	}
+//		**************************************************
+		}
 }
