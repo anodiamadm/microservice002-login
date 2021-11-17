@@ -6,13 +6,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.security.SecureRandom;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -51,6 +57,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
+//        corsConfiguration.setAllowedOrigins(List.of("*"));
+        corsConfiguration.setAllowedOriginPatterns(List.of("*"));
+        corsConfiguration.setAllowedMethods(List.of("GET", "POST", "DELETE"));
+        corsConfiguration.setAllowCredentials(true);
+        corsConfiguration.setExposedHeaders(List.of("Authorization"));
+
         http
 //                Remove CSRF and State in Session coz in JWT those are not required
                 .csrf().disable()
@@ -65,7 +79,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                                           TOKEN_PREFIX, HEADER_STRING)))
                 .authorizeRequests()
 //                Configure Access Rules
-                .antMatchers("/login").permitAll();
+                .antMatchers("/login").permitAll().anyRequest()
+                .authenticated().and().cors().configurationSource(request -> corsConfiguration);
     }
 
     @Bean

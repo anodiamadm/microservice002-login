@@ -60,7 +60,7 @@ class JwtAuthApplicationTests {
 //		If both conditions 1 & 2 above pass, consider test case successful.
 //		************************* Need to write these lines to verify login *************************
 		assertEquals(inputUser.getMessageResponse().getMessage(),
-				"Login failure! Incorrect username or password.");
+				"Login failure! Not a valid Anodiam username.");
 	}
 
 //	Use Case 5.2: If I enter incorrect password (correct username), I should NOT receive a JWT Token
@@ -78,6 +78,6 @@ class JwtAuthApplicationTests {
 //		If both conditions 1 & 2 above pass, consider test case successful.
 //		************************* Need to write these lines to verify login *************************
 		assertEquals(inputUser.getMessageResponse().getMessage(),
-				"Login failure! Incorrect username or password.");
+				"Login failure! Incorrect password..");
 	}
 }

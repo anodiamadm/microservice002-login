@@ -44,7 +44,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         }catch(Exception ex){
             ex.printStackTrace();
         }
-        System.out.println("credentials.getUsername()=" + credentials.getUsername());
 
 //        Create Login Token
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
@@ -66,6 +65,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .withExpiresAt(new Date(System.currentTimeMillis() + jwtProperties.getEXPIRATION_TIME()))
                 .sign(Algorithm.HMAC512(jwtProperties.getSECRET().getBytes()));
 //        Add Token in response
-        response.addHeader(jwtProperties.getHEADER_STRING(), jwtProperties.getTOKEN_PREFIX() + token);
+        response.getOutputStream().print(new ObjectMapper().writeValueAsString(token));
+        response.flushBuffer();
     }
 }

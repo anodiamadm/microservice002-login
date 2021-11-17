@@ -17,7 +17,8 @@ class UserServiceDal extends UserServiceImpl {
     @Override
     public Optional<User> findByUsername(String username) {
         try {
-            Optional<User> optionalUser = userRepository.findByUsername(username);
+            String enocdedUserName=new GeneralEncoderDecoder().encrypt(username);
+            Optional<User> optionalUser = userRepository.findByUsername(enocdedUserName);
             if(optionalUser.isPresent()) {
                 return optionalUser;
             }
