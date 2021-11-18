@@ -15,10 +15,12 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="user_id")
     private BigInteger userId;
 
     private int active;
 
+    @Column(name="date_created")
     private Date dateCreated;
 
     private String password;
