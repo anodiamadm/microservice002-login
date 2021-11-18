@@ -31,24 +31,22 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 //    Trigger when we issue POST request to /login with username & password in the body of the request
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-//        Grab credentials to map them to LoginViewModel
+
+        // Grab credentials to map them to LoginViewModel
         LoginViewModel credentials = null;
-        try {
+        String username ="";
+        try
+        {
             credentials = new ObjectMapper().readValue(request.getInputStream(), LoginViewModel.class);
-        } catch (IOException e) {
+            username = new GeneralEncoderDecoder().encrypt(credentials.getUsername());
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        String username ="";
-        try {
-            username = new GeneralEncoderDecoder().encrypt(credentials.getUsername());
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
 
-//        Create Login Token
+        // Create Login Token
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                 username, credentials.getPassword(), new ArrayList<>());
-//        Authenticate User
+        // Authenticate User
         Authentication auth = authenticationManager.authenticate(authenticationToken);
         return  auth;
     }
@@ -57,14 +55,15 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
                                             FilterChain chain, Authentication authResult)
                                             throws IOException, ServletException {
-//        Grab Principal
+        // Grab Principal
         UserPrincipal principal = (UserPrincipal) authResult.getPrincipal();
-//        Create JWT Token
+        // Create JWT Token
         String token = JWT.create()
                 .withSubject(principal.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + jwtProperties.getEXPIRATION_TIME()))
                 .sign(Algorithm.HMAC512(jwtProperties.getSECRET().getBytes()));
-//        Add Token in response
+
+        // Add Token in response
         response.getOutputStream().print(new ObjectMapper().writeValueAsString(token));
         response.flushBuffer();
     }
