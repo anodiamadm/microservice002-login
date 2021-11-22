@@ -5,6 +5,8 @@ import com.anodiam.LoginRESTAPI.serviceRepository.User.GeneralEncoderDecoder;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -64,7 +66,16 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .sign(Algorithm.HMAC512(jwtProperties.getSECRET().getBytes()));
 
         // Add Token in response
-        response.getOutputStream().print(new ObjectMapper().writeValueAsString(token));
+        JSONArray array = new JSONArray();
+        JSONObject item = new JSONObject();
+        try
+        {
+            item.put("UserId", principal.getUser().getUserId());
+            item.put("Token", token);
+            array.put(item);
+        }catch(Exception ex){}
+
+        response.getOutputStream().print(new ObjectMapper().writeValueAsString(array.toString()));
         response.flushBuffer();
     }
 }
