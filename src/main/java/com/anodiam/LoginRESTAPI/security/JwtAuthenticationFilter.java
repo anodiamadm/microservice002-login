@@ -5,7 +5,6 @@ import com.anodiam.LoginRESTAPI.serviceRepository.User.GeneralEncoderDecoder;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
-//import org.json.JSONObject;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -66,15 +65,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         // Add Token in response
         response.getOutputStream().print(token);
-//        JSONObject item = new JSONObject();
-//        try
-//        {
-//            item.put("UserId", principal.getUser().getUserId());
-//            item.put("Token", token);
-//        }catch(Exception ex){
-//            ex.printStackTrace();
-//        }
-//        response.getOutputStream().print(item.toString());
         response.flushBuffer();
     }
 }
