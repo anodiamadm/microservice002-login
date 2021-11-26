@@ -64,7 +64,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .sign(Algorithm.HMAC512(jwtProperties.getSECRET().getBytes()));
 
         // Add Token in response
-        response.getOutputStream().print(token);
+        response.getOutputStream().print("{\"Bearer\": \"" + token + "\"}");
         response.flushBuffer();
     }
 }
