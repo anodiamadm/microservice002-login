@@ -1,10 +1,5 @@
 package com.anodiam.LoginRESTAPI.model;
 
-import com.anodiam.LoginRESTAPI.model.common.MessageResponse;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -23,22 +18,11 @@ public class Permission {
 	@ManyToMany(mappedBy = "permissionList")
 	private Collection<User> userList = new ArrayList<>();
 
-	@Transient
-	private MessageResponse messageResponse;
-
 	public Permission(String permissionName) {
 		this.permissionName = permissionName;
 	}
 
 	public Permission() {
-	}
-
-	public MessageResponse getMessageResponse() {
-		return messageResponse;
-	}
-
-	public void setMessageResponse(MessageResponse messageResponse) {
-		this.messageResponse = messageResponse;
 	}
 
 	public void setPermissionId(BigInteger permissionId) {

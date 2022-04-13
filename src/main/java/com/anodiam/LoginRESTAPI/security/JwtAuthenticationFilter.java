@@ -1,7 +1,6 @@
 package com.anodiam.LoginRESTAPI.security;
 
 import com.anodiam.LoginRESTAPI.model.LoginViewModel;
-import com.anodiam.LoginRESTAPI.serviceRepository.User.GeneralEncoderDecoder;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -38,7 +37,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         try
         {
             credentials = new ObjectMapper().readValue(request.getInputStream(), LoginViewModel.class);
-            username = new GeneralEncoderDecoder().encrypt(credentials.getUsername());
+            username = credentials.getUsername();
         } catch (Exception e) {
             e.printStackTrace();
         }

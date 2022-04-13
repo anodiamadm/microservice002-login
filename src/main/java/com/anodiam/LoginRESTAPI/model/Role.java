@@ -1,7 +1,5 @@
 package com.anodiam.LoginRESTAPI.model;
 
-import com.anodiam.LoginRESTAPI.model.common.MessageResponse;
-
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -20,22 +18,11 @@ public class Role {
 	@ManyToMany(mappedBy = "roleList")
 	private Collection<User> userList = new ArrayList<>();
 
-	@Transient
-	private MessageResponse messageResponse;
-
 	public Role(String roleName) {
 		this.roleName = roleName;
 	}
 
 	public Role() {
-	}
-
-	public MessageResponse getMessageResponse() {
-		return messageResponse;
-	}
-
-	public void setMessageResponse(MessageResponse messageResponse) {
-		this.messageResponse = messageResponse;
 	}
 
 	public void setRoleId(BigInteger roleId) {
