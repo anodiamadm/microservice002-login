@@ -1,5 +1,6 @@
 package com.anodiam.LoginRESTAPI.model;
 
+import com.anodiam.LoginRESTAPI.model.common.MessageResponse;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -14,12 +15,10 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="user_id")
     private BigInteger userId;
 
     private int active;
 
-    @Column(name="date_created")
     private Date dateCreated;
 
     private String password;
@@ -36,13 +35,24 @@ public class User {
     @JoinTable(name = "user_permission", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "permission_id"))
     private List<Permission> permissionList = new ArrayList<>();
 
-    public User(){}
+    @Transient
+    private MessageResponse messageResponse;
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
         this.active=1;
         this.dateCreated = new Date();
+    }
+
+    public User(){}
+
+    public MessageResponse getMessageResponse() {
+        return messageResponse;
+    }
+
+    public void setMessageResponse(MessageResponse messageResponse) {
+        this.messageResponse = messageResponse;
     }
 
     public void setUserId(BigInteger userId) {
