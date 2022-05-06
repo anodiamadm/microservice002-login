@@ -30,8 +30,7 @@ class UserServiceDal extends UserServiceImpl {
             } else {
                 userReturned.setMessageResponse(new
                         MessageResponse(ResponseCode.USER_NOT_REGISTERED.getID(),
-                        ResponseCode.USER_NOT_REGISTERED.getMessage()
-                                + username));
+                        ResponseCode.USER_NOT_REGISTERED.getMessage() + username));
             }
         } catch (Exception exception) {
             exception.printStackTrace();

@@ -30,17 +30,19 @@ class JwtAuthApplicationTests {
 	@Autowired
 	private RoleService roleService;
 
+	//	Role should not be fetched against invalid Role Name
 	@Test
-	public void testNegativeFindByInvalidRoleName() throws Exception
+	public void testNegativeFindRoleByInvalidRoleName() throws Exception
 	{
 		String roleName="INVALID_ROLE";
 		Role role = roleService.findByRoleName(roleName).get();
-		assertEquals(ResponseCode.ROLE_NAME_INVALID.getMessage() + role.getRoleName(),
+		assertEquals(ResponseCode.ROLE_NAME_INVALID.getMessage() + roleName,
 				role.getMessageResponse().getMessage());
 	}
 
+	//	Correct Role should be fetched against valid Role Name
 	@Test
-	public void testPositiveFindByValidRoleName() throws Exception
+	public void testPositiveFindRoleByValidRoleName() throws Exception
 	{
 		String roleName="USER";
 		Role role = roleService.findByRoleName(roleName).get();
@@ -48,17 +50,19 @@ class JwtAuthApplicationTests {
 				role.getMessageResponse().getMessage());
 	}
 
+	//	Permission should not be fetched against invalid Permission Name
 	@Test
-	public void testNegativeFindByInvalidPermissionName() throws Exception
+	public void testNegativeFindPermissionByInvalidPermissionName() throws Exception
 	{
 		String permissionName="INVALID_ACCESS";
 		Permission permission = permissionService.findByPermissionName(permissionName).get();
-		assertEquals(ResponseCode.PERMISSION_NAME_INVALID.getMessage()
-				+ permission.getPermissionName(), permission.getMessageResponse().getMessage());
+		assertEquals(ResponseCode.PERMISSION_NAME_INVALID.getMessage() + permissionName,
+				permission.getMessageResponse().getMessage());
 	}
 
+	//	Correct Permission should be fetched against valid Permission Name
 	@Test
-	public void testPositiveFindByValidPermissionName() throws Exception
+	public void testPositiveFindPermissionByValidPermissionName() throws Exception
 	{
 		String permissionName="STUDENT_ACCESS";
 		Permission permission = permissionService.findByPermissionName(permissionName).get();
@@ -66,8 +70,9 @@ class JwtAuthApplicationTests {
 				+ permission.getPermissionName(), permission.getMessageResponse().getMessage());
 	}
 
+	//	User should NOT be fetched against invalid Email
 	@Test
-	public void testNegativeFindByWrongEmail() throws Exception
+	public void testNegativeFindUserByWrongEmail() throws Exception
 	{
 		String email="invalidemail@gmail.com";
 		User foundUser = userService.findByUsername(email).get();
@@ -75,8 +80,9 @@ class JwtAuthApplicationTests {
 				foundUser.getMessageResponse().getMessage());
 	}
 
+	//	Correct User should be fetched against valid Email
 	@Test
-	public void testPositiveFindByCorrectEmail() throws Exception
+	public void testPositiveFindUserByCorrectEmail() throws Exception
 	{
 		String email="pinaki.sen@gmail.com";
 		User foundUser = userService.findByUsername(email).get();
