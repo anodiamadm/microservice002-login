@@ -18,6 +18,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.security.SecureRandom;
+import java.util.Arrays;
 import java.util.List;
 
 @Configuration
@@ -58,12 +59,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
-//        corsConfiguration.setAllowedOrigins(List.of("*"));
-        corsConfiguration.setAllowedOriginPatterns(List.of("*"));
-        corsConfiguration.setAllowedMethods(List.of("GET", "POST", "DELETE"));
+        corsConfiguration.setAllowedHeaders(Arrays.asList(new String[]{"Authorization",
+                "Cache-Control", "Content-Type"}));
+//        corsConfiguration.setAllowedOrigins(Arrays.asList(new String[]{"*"}));
+        corsConfiguration.setAllowedOriginPatterns(Arrays.asList(new String[]{"*"}));
+        corsConfiguration.setAllowedMethods(Arrays.asList(new String[]{"GET", "POST",
+                "DELETE"}));
         corsConfiguration.setAllowCredentials(true);
-        corsConfiguration.setExposedHeaders(List.of("Authorization"));
+        corsConfiguration.setExposedHeaders(Arrays.asList(new String[]{"Authorization"}));
 
         http
 //                Remove CSRF and State in Session coz in JWT those are not required
