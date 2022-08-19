@@ -11,11 +11,10 @@
         <module name="microservice002-login" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="11" />
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="LoginRESTAPI" options="-parameters" />
-      <module name="bootsecurity" options="-parameters" />
       <module name="microservice002-login" options="-parameters" />
     </option>
   </component>
